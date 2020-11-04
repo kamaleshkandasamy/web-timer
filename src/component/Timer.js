@@ -1,30 +1,27 @@
 import React, { Component } from "react";
 import "./Timer.css";
 
-import * as EasyTimer from "easytimer.js";
+import EasyTimer from "easytimer.js";
 
 class Timer extends Component {
   constructor(props) {
     super(props);
 	this.state = {
-      timer_text: timer.getTimeValues().toString(),
-      timer: timer,
+      timer_text: new Easytimer().getTimeValues().toString(),
+      timer: new Easytimer(),
       timer_state: "stopped"
     };
-
-    //Bind the functions
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.pauseTimer = this.pauseTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
     this.logTime = this.logTime.bind(this);
+    
+    this.state.timer.addEventListener("secondsUpdated", this.onTimerUpdated.bind(this));
 
-    //Add the listeners
-    timer.addEventListener("secondsUpdated", this.onTimerUpdated.bind(this));
+    this.state.timer.addEventListener("started", this.onTimerUpdated.bind(this));
 
-    timer.addEventListener("started", this.onTimerUpdated.bind(this));
-
-    timer.addEventListener("reset", this.onTimerUpdated.bind(this));
+    this.state.timer.addEventListener("reset", this.onTimerUpdated.bind(this));
   }
 
   componentWillUnmount() {
@@ -100,11 +97,12 @@ class Timer extends Component {
               <i className="fas fa-pause" />
             </button>
           )}
-
+               
           <button onClick={this.resetTimer} className="btn btn-primary">
             <i className="fas fa-sync-alt" />
           </button>
         </div>
+            &nbsp;
         <div className="log-button">
           <button
             onClick={this.logTime}
