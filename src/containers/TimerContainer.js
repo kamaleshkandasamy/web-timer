@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 
 //child component
-import Timer from '../components/Timer';
+import Timer from './../components/Timer';
 
 //Redux actions
 import {addTime} from '../actions';
