@@ -1,0 +1,13 @@
+.Timer {
+border : 3px solid orangered;
+padding : 16px;
+border-radius: 100px;
+
+}
+.timer-text {
+text-align :center;
+}
+
+.timer-button {
+    margin: 10px;
+}
